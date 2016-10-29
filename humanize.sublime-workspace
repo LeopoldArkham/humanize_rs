@@ -1,0 +1,293 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"to",
+				"to_bool"
+			],
+			[
+				"ass",
+				"assert_eq\tassert_eq!(…, …)"
+			],
+			[
+				"humanize",
+				"Humanize"
+			],
+			[
+				"damage_relation",
+				"damage_relation_double"
+			],
+			[
+				"rec",
+				"recieving_1"
+			],
+			[
+				"get",
+				"get_json_for_type"
+			],
+			[
+				"dam",
+				"damage_relation"
+			],
+			[
+				"dama",
+				"damage_relations"
+			],
+			[
+				"mut",
+				"mut"
+			],
+			[
+				"offset",
+				"offset_modes"
+			],
+			[
+				"adjac",
+				"AdjacentScanMode"
+			],
+			[
+				"opt",
+				"optimize_one_pass"
+			],
+			[
+				"partial",
+				"PartialEq"
+			],
+			[
+				"promote",
+				"blind_promote"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"f",
+				"font"
+			],
+			[
+				"w",
+				"write"
+			],
+			[
+				"imp",
+				"impl-trait\timpl … for … { … }"
+			],
+			[
+				"print",
+				"println\tprintln!(…)"
+			],
+			[
+				"dra",
+				"draw_star"
+			],
+			[
+				"dr",
+				"draw_polygon"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"d",
+				"Draw"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "ins",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"sspy",
+				"Set Syntax: Python"
+			]
+		],
+		"width": 432.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Programming/humanize_rs"
+	],
+	"file_history":
+	[
+		"/D/Programming/Daily/poke_api/src/comments",
+		"/D/Programming/Daily/poke_api/src/main.rs",
+		"/D/Programming/humanize_rs/src/lib.rs",
+		"/D/Programming/humanize_rs/src/bool.rs",
+		"/C/Users/leopo/AppData/Roaming/Sublime Text 3/Packages/Rust/Rust.sublime-settings",
+		"/D/Programming/Daily/pokePI/Cargo.toml",
+		"/D/Programming/Daily/pokePI/src/main.rs",
+		"/D/Programming/Daily/Adjacent-Numbers/src/main.rs",
+		"/D/Programming/Daily/Adjacent-Numbers/check.py",
+		"/C/Users/leopo/OneDrive/Website/schnizzleflop.css",
+		"/C/Users/leopo/OneDrive/Website/index.html",
+		"/D/Programming/Daily/2016-10-19 Challenge 288 Intermediate Stars and Stripes and Vertices/Python/main.py",
+		"/D/Programming/Daily/[2016-10-19] Challenge #288 [Intermediate] Stars and Stripes and Vertices/Python/main.py"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\t    \t\t\t\t\t\t\t\t\t\t\t             ",
+			"Cell",
+			"self",
+			"append"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "humanize.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

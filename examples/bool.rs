@@ -3,7 +3,7 @@ extern crate humanize;
 use humanize::bool::{ToBool, Humanize};
 
 fn main() {
-	// &str to bool
+    // &str to bool
     println!("{}", "yes".to_bool().unwrap());
 
     // String to bool

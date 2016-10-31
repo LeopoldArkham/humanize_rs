@@ -2,3 +2,5 @@ target
 Cargo.lock
 humanize.sublime-project
 humanize.sublime-workspace
+
+*.sublime-workspace

@@ -9,10 +9,9 @@ trait HumanizeNumbers {
     fn ord(&self) -> &str;
 }
 
-impl<I> HumanizeNumbers for I
-{
+impl HumanizeNumbers for u8 {
     fn ord(&self) -> &str {
-    	let r = self % 10;
+    	let r = *self % 10;
         match r {
         	1 => "st",
         	2 => "nd",

@@ -1,7 +1,6 @@
 [package]
 name = "humanize"
 version = "0.1.0"
-authors = ["LeopoldArkham <leopold.arkham@gmail.com>"]
+authors = ["Leopold Arkham <leopold.arkham@gmail.com>"]
 
 [dependencies]
-num-traits = "0.1.36"

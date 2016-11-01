@@ -1,3 +1,4 @@
+use super::humanize::Humanize;
 
 static TO_TRUE: [&'static str; 9] = ["1", "yes", "y", "ok", "okay", "continue", "go", "on", "true"];
 
@@ -35,10 +36,6 @@ impl ToBool for String {
             None
         }
     }
-}
-
-pub trait Humanize {
-    fn humanize(&self) -> &str;
 }
 
 impl Humanize for bool {

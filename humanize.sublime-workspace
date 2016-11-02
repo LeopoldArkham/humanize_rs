@@ -123,16 +123,7 @@
 			"file": "src/numbers.rs",
 			"settings":
 			{
-				"buffer_size": 429,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "examples/bool.rs",
-			"settings":
-			{
-				"buffer_size": 401,
+				"buffer_size": 1476,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -141,7 +132,7 @@
 			"file": "Cargo.toml",
 			"settings":
 			{
-				"buffer_size": 138,
+				"buffer_size": 118,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -219,6 +210,7 @@
 	],
 	"file_history":
 	[
+		"/D/Programming/humanize_rs/examples/bool.rs",
 		"/D/Programming/humanize_rs/src/numbers.rs",
 		"/D/Programming/humanize_rs/examples/humanize",
 		"/D/Programming/humanize_rs/examples/humanize.rs",
@@ -313,15 +305,35 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 429,
+						"buffer_size": 1476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								242,
-								242
+								298,
+								298
+							],
+							[
+								494,
+								494
+							],
+							[
+								691,
+								691
+							],
+							[
+								888,
+								888
+							],
+							[
+								1085,
+								1085
+							],
+							[
+								1282,
+								1282
 							]
 						],
 						"settings":
@@ -329,7 +341,7 @@
 							"syntax": "Packages/Rust/Rust.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1500.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -337,47 +349,19 @@
 				},
 				{
 					"buffer": 2,
-					"file": "examples/bool.rs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 401,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								79,
-								79
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rust/Rust.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "Cargo.toml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 138,
+						"buffer_size": 118,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								138,
-								138
+								66,
+								66
 							]
 						],
 						"settings":
@@ -388,7 +372,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -398,7 +382,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "src/lib.rs",
 					"semi_transient": false,
 					"settings":
@@ -422,11 +406,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "src/humanize.rs",
 					"semi_transient": false,
 					"settings":
@@ -450,7 +434,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]

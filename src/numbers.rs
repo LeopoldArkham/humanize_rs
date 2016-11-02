@@ -1,8 +1,5 @@
-extern crate num_traits;
-
 #[allow(unused_imports)]
 use super::humanize::Humanize;
-use self::num_traits::PrimInt;
 
 
 trait HumanizeNumbers {
@@ -11,17 +8,75 @@ trait HumanizeNumbers {
 
 impl HumanizeNumbers for u8 {
     fn ord(&self) -> &str {
-    	let r = *self % 10;
-        match r {
+        let suffix = match self % 10 {
         	1 => "st",
         	2 => "nd",
         	3 => "rd",
         	_ => "th"
-        }
+        };
+    }
+}
+
+impl HumanizeNumbers for i8 {
+    fn ord(&self) -> &str {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
+    }
+}
+
+impl HumanizeNumbers for u16 {
+    fn ord(&self) -> &str {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
+    }
+}
+
+impl HumanizeNumbers for i16 {
+    fn ord(&self) -> &str {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
+    }
+}
+
+impl HumanizeNumbers for u32 {
+    fn ord(&self) -> &str {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
+    }
+}
+
+impl HumanizeNumbers for i32 {
+    fn ord(&self) -> &str {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
     }
 }
 
 #[test]
 fn test_ordinals() {
-	assert_eq!(5.ord(), "test");
+	assert_eq!(101.ord(), "st");
+	assert_eq!(2.ord(), "nd");
+	assert_eq!(10093.ord(), "rd");
+	assert_eq!((-159652).ord(), "th");
+	assert_eq!(0.ord(), "th");
 }

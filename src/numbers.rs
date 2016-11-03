@@ -1,10 +1,9 @@
-#[allow(unused_imports)]
 use super::humanize::Humanize;
 use std::fmt::Write;
 
-
-trait HumanizeNumbers {
+pub trait HumanizeNumbers {
     fn ord(&self) -> String;
+    fn to_text(&self) -> String;
 }
 
 impl HumanizeNumbers for u8 {
@@ -18,6 +17,10 @@ impl HumanizeNumbers for u8 {
         let mut res = String::new();
         let _ = write!(res, "{}{}", self, suffix);
         res
+    }
+
+    fn to_text(&self) -> String {
+    	
     }
 }
 
@@ -78,6 +81,34 @@ impl HumanizeNumbers for u32 {
 }
 
 impl HumanizeNumbers for i32 {
+    fn ord(&self) -> String {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
+        let mut res = String::new();
+        let _ = write!(res, "{}{}", self, suffix);
+        res
+    }
+}
+
+impl HumanizeNumbers for usize {
+    fn ord(&self) -> String {
+        let suffix = match self % 10 {
+        	1 => "st",
+        	2 => "nd",
+        	3 => "rd",
+        	_ => "th"
+        };
+        let mut res = String::new();
+        let _ = write!(res, "{}{}", self, suffix);
+        res
+    }
+}
+
+impl HumanizeNumbers for isize {
     fn ord(&self) -> String {
         let suffix = match self % 10 {
         	1 => "st",

@@ -1,8 +1,6 @@
-#[allow(unused_imports)]
-use super::humanize::Humanize;
 use std::fmt::Write;
 
-static DIGITS: [&'static str; 10] = ["padding", "one", "two", "three", "four", "five", "six",
+static DIGITS: [&'static str; 10] = ["pad", "one", "two", "three", "four", "five", "six",
                                      "seven", "eight", "nine"];
 
 static TO_20: [&'static str; 10] = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
@@ -17,52 +15,45 @@ pub trait HumanizeNumbers {
     // fn to_text(&self) -> String;
 }
 
-#[allow(unused_variables)]
-fn stringify(res: &mut String, chunk: &Vec<&u64>, scale: usize) {
-    if chunk.len() == 1 {
-    	*res += DIGITS[*chunk[0] as usize];
-    	*res += SCALE[scale];
-    	return;
-    } else if chunk.len() == 2 {
-    	if *chunk[0] != 0 {
-    	*res += " and ";
-    	if *chunk[0] == 1 {
-    		*res += TO_20[*chunk[1] as usize];
-    	} else {
-    		*res += TENS[*chunk[0] as usize];
-    		if *chunk[1] != 0 {
-    			*res += "-";
-    			*res += DIGITS[*chunk[1] as usize] ;
-    		}
-    	}
-    } else if *chunk[1] != 0 {
-    	*res += " and ";
-    	*res += DIGITS[*chunk[2] as usize];
-    }
-    }
-
-    if chunk.len() == 3 {
-        *res += DIGITS[*chunk[0] as usize];
-        *res += " hundred";
-    }
-
-    if *chunk[1] != 0 {
-    	*res += " and ";
-    	if *chunk[1] == 1 {
+fn stringify(res: &mut String, chunk: &Vec<&u64>) {
+    match chunk.as_slice() {
+    	&[_, &1, _] => {
+    		*res += DIGITS[*chunk[0] as usize];
+    		*res += " hundred and ";
     		*res += TO_20[*chunk[2] as usize];
-    	} else {
+    	},
+    	&[_, &0, _] => {
+    		*res += DIGITS[*chunk[0] as usize];
+    		*res += " hundred ";
+    		if *chunk[2] != 0 {
+    			*res += "and ";
+    			*res += DIGITS[*chunk[2] as usize]
+    		}
+    	},
+    	&[_, _, _] => {
+    		*res += DIGITS[*chunk[0] as usize];
+    		*res += " hundred and ";
     		*res += TENS[*chunk[1] as usize];
     		if *chunk[2] != 0 {
     			*res += "-";
-    			*res += DIGITS[*chunk[2] as usize] ;
+    			*res += DIGITS[*chunk[2] as usize]
     		}
-    	}
-    } else if *chunk[2] != 0 {
-    	*res += " and ";
-    	*res += DIGITS[*chunk[2] as usize];
+    	},
+    	&[&1, _] => {
+    		*res += TO_20[*chunk[1] as usize];
+    	},
+    	&[_, _] => {
+    		*res += TENS[*chunk[0] as usize];
+    		if *chunk[1] != 0 {
+    			*res += "-";
+    			*res += DIGITS[*chunk[1] as usize]
+    		}
+    	},
+    	&[_] => {
+    		*res += DIGITS[*chunk[0] as usize];
+    	},
+    	_ => unreachable!()
     }
-
-    *res += SCALE[scale];
 }
 
 pub fn to_text(_num: u64) -> String {
@@ -93,7 +84,8 @@ pub fn to_text(_num: u64) -> String {
     let mut counter = chunks.len();
     for chunk in chunks.iter() {
         counter -= 1;
-        stringify(&mut result, chunk, counter);
+        stringify(&mut result, chunk);
+        result += SCALE[counter as usize];
     }
     result
 }

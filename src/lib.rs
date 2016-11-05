@@ -1,3 +1,5 @@
+#![feature(slice_patterns)]
+
 extern crate itertools;
 
 pub mod bool;

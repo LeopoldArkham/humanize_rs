@@ -1,14 +1,31 @@
 use std::fmt::Write;
 
-static DIGITS: [&'static str; 10] = ["pad", "one", "two", "three", "four", "five", "six",
-                                     "seven", "eight", "nine"];
+static DIGITS: [&'static str; 10] = ["pad", "one", "two", "three", "four", "five", "six", "seven",
+                                     "eight", "nine"];
 
-static TO_20: [&'static str; 10] = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
-                                    "seventeen", "eighteen", "nineteen"];                     
+static TO_20: [&'static str; 10] = ["ten",
+                                    "eleven",
+                                    "twelve",
+                                    "thirteen",
+                                    "fourteen",
+                                    "fifteen",
+                                    "sixteen",
+                                    "seventeen",
+                                    "eighteen",
+                                    "nineteen"];
 
-static TENS: [&'static str; 10] = ["padding", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+static TENS: [&'static str; 10] = ["padding", "ten", "twenty", "thirty", "fourty", "fifty",
+                                   "sixty", "seventy", "eighty", "ninety"];
 
-static SCALE: [&'static str; 6] = ["", " thousand ", " million ", " billion ", " trillion ", " schnillion "];
+static SCALE: [&'static str; 9] = ["",
+                                   " thousand ",
+                                   " million ",
+                                   " billion ",
+                                   " trillion ",
+                                   " quadrillion ",
+                                   " quintillion ",
+                                   " hexillion ",
+                                   " heptillion "];
 
 pub trait HumanizeNumbers {
     fn ord(&self) -> String;
@@ -17,42 +34,42 @@ pub trait HumanizeNumbers {
 
 fn stringify(res: &mut String, chunk: &Vec<&u64>) {
     match chunk.as_slice() {
-    	&[_, &1, _] => {
-    		*res += DIGITS[*chunk[0] as usize];
-    		*res += " hundred and ";
-    		*res += TO_20[*chunk[2] as usize];
-    	},
-    	&[_, &0, _] => {
-    		*res += DIGITS[*chunk[0] as usize];
-    		*res += " hundred ";
-    		if *chunk[2] != 0 {
-    			*res += "and ";
-    			*res += DIGITS[*chunk[2] as usize]
-    		}
-    	},
-    	&[_, _, _] => {
-    		*res += DIGITS[*chunk[0] as usize];
-    		*res += " hundred and ";
-    		*res += TENS[*chunk[1] as usize];
-    		if *chunk[2] != 0 {
-    			*res += "-";
-    			*res += DIGITS[*chunk[2] as usize]
-    		}
-    	},
-    	&[&1, _] => {
-    		*res += TO_20[*chunk[1] as usize];
-    	},
-    	&[_, _] => {
-    		*res += TENS[*chunk[0] as usize];
-    		if *chunk[1] != 0 {
-    			*res += "-";
-    			*res += DIGITS[*chunk[1] as usize]
-    		}
-    	},
-    	&[_] => {
-    		*res += DIGITS[*chunk[0] as usize];
-    	},
-    	_ => unreachable!()
+        &[_, &1, _] => {
+            *res += DIGITS[*chunk[0] as usize];
+            *res += " hundred and ";
+            *res += TO_20[*chunk[2] as usize];
+        }
+        &[_, &0, _] => {
+            *res += DIGITS[*chunk[0] as usize];
+            *res += " hundred ";
+            if *chunk[2] != 0 {
+                *res += "and ";
+                *res += DIGITS[*chunk[2] as usize]
+            }
+        }
+        &[_, _, _] => {
+            *res += DIGITS[*chunk[0] as usize];
+            *res += " hundred and ";
+            *res += TENS[*chunk[1] as usize];
+            if *chunk[2] != 0 {
+                *res += "-";
+                *res += DIGITS[*chunk[2] as usize]
+            }
+        }
+        &[&1, _] => {
+            *res += TO_20[*chunk[1] as usize];
+        }
+        &[_, _] => {
+            *res += TENS[*chunk[0] as usize];
+            if *chunk[1] != 0 {
+                *res += "-";
+                *res += DIGITS[*chunk[1] as usize]
+            }
+        }
+        &[_] => {
+            *res += DIGITS[*chunk[0] as usize];
+        }
+        _ => unreachable!(),
     }
 }
 

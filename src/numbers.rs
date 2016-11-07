@@ -86,7 +86,6 @@ pub fn to_text(_num: u64) -> String {
         let cur = num % divider;
         split_digits.push(cur / (divider / 10));
         num -= cur;
-        println!("{}", cur);
         divider *= 10;
     }
     // TODO Change this to something less suicide-inducing

@@ -13,7 +13,7 @@ fn main() {
 	// for (i, name) in scoreboard.iter().enumerate() {
 	// 	println!("{}: {}", (i+1).ord(), name);
 	// }
-	let num: u64 = 53200397154;
+	let num: u64 = u64::max_value();
 	test_to_string(num);
-
+	println!("{}", u64::max_value());
 }

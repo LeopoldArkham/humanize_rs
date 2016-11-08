@@ -32,44 +32,54 @@ pub trait HumanizeNumbers {
     // fn to_text(&self) -> String;
 }
 
-fn stringify(res: &mut String, chunk: &Vec<&u64>) {
-    match chunk.as_slice() {
-        &[_, &1, _] => {
-            *res += DIGITS[*chunk[0] as usize];
-            *res += " hundred and ";
-            *res += TO_20[*chunk[2] as usize];
-        }
-        &[_, &0, _] => {
-            *res += DIGITS[*chunk[0] as usize];
-            *res += " hundred ";
-            if *chunk[2] != 0 {
-                *res += "and ";
-                *res += DIGITS[*chunk[2] as usize]
-            }
-        }
-        &[_, _, _] => {
-            *res += DIGITS[*chunk[0] as usize];
-            *res += " hundred and ";
-            *res += TENS[*chunk[1] as usize];
-            if *chunk[2] != 0 {
-                *res += "-";
-                *res += DIGITS[*chunk[2] as usize]
-            }
-        }
-        &[&1, _] => {
-            *res += TO_20[*chunk[1] as usize];
-        }
-        &[_, _] => {
-            *res += TENS[*chunk[0] as usize];
-            if *chunk[1] != 0 {
-                *res += "-";
-                *res += DIGITS[*chunk[1] as usize]
-            }
-        }
-        &[_] => {
-            *res += DIGITS[*chunk[0] as usize];
-        }
-        _ => unreachable!(),
+fn stringify(res: &mut String, chunk: Vec<u64>) {
+    match chunk.len() {
+    	3 => {
+    		match chunk[1] {
+    			1 => {
+    				*res += DIGITS[chunk[0] as usize];
+            		*res += " hundred and ";
+            		*res += TO_20[chunk[2] as usize];
+    			}
+    			0 => {
+    				*res += DIGITS[chunk[0] as usize];
+            		*res += " hundred";
+            		if chunk[2] != 0 {
+                		*res += " and ";
+                		*res += DIGITS[chunk[2] as usize]
+            		}
+    			}
+    			_ => {
+    				if chunk[0] != 0 {
+	    				*res += DIGITS[chunk[0] as usize];
+	            		*res += " hundred and ";
+	            	}
+	            	*res += TENS[chunk[1] as usize];
+            		if chunk[2] != 0 {
+                		*res += "-";
+                		*res += DIGITS[chunk[2] as usize]
+            		}
+    			}
+    		}
+    	}
+    	2 => {
+    		match chunk[0] {
+    			1 => {
+    				*res += TO_20[chunk[1] as usize]
+    			}
+    			_ => {
+    				*res += TENS[chunk[0] as usize];
+            		if chunk[1] != 0 {
+                		*res += "-";
+                		*res += DIGITS[chunk[1] as usize]
+            		}
+        		}
+    		}
+    	}
+    	1 => {
+    		*res += DIGITS[chunk[0] as usize];
+    	}
+    	_ => unreachable!{}
     }
 }
 
@@ -80,30 +90,29 @@ pub fn to_text(_num: u64) -> String {
 
     let mut num = _num;
     let mut split_digits = Vec::new();
-    let mut divider = 10;
+    // let mut divider: u64 = 10;
 
     while num > 0 {
-        let cur = num % divider;
-        split_digits.push(cur / (divider / 10));
-        num -= cur;
-        divider *= 10;
+        // let cur = num % 10;
+        split_digits.insert(0, num % 10);
+        num /= 10
+        // divider *= 10;
     }
-    // TODO Change this to something less suicide-inducing
-    let chunks = &split_digits.chunks(3)
-        .collect::<Vec<_>>()
-        .iter()
-        .map(|e| e.iter().rev().collect::<Vec<_>>())
-        .collect::<Vec<_>>();
-    let chunks = chunks.iter().rev().collect::<Vec<_>>();
+    	
+	let (first, remainder) = split_digits.split_at(split_digits.len() % 3);
+	let chunks = first.chunks(3).chain(remainder.chunks(3)).map(|x| x.to_vec()).collect::<Vec<_>>();
 
-    let mut result = String::new();
-    let mut counter = chunks.len();
-    for chunk in chunks.iter() {
-        counter -= 1;
-        stringify(&mut result, chunk);
-        result += SCALE[counter as usize];
-    }
-    result
+	let mut res = String::new();
+	let mut scale_idx = chunks.len();
+
+	for c in chunks {
+		stringify(&mut res, c);
+		scale_idx -= 1;
+		res += SCALE[scale_idx];
+	}
+
+	res
+
 }
 
 impl HumanizeNumbers for u8 {

@@ -1,10 +1,5 @@
 extern crate humanize;
-#[allow(unused_imports)]
-use humanize::numbers::{HumanizeNumbers, to_text};
-
-fn test_to_string(num: u64) {
-	println!{"{}", to_text(num)};
-}
+use humanize::numbers::{HumanizeNumbers};
 
 fn main() {
 	// let scoreboard = ["Bob", "Victor", "Richard", "John",
@@ -13,7 +8,6 @@ fn main() {
 	// for (i, name) in scoreboard.iter().enumerate() {
 	// 	println!("{}: {}", (i+1).ord(), name);
 	// }
-	let num: u64 = u64::max_value();
-	test_to_string(num);
-	println!("{}", u64::max_value());
+	let num: u64 = 666666666;
+	println!("{}: {}", num, num.to_text());
 }

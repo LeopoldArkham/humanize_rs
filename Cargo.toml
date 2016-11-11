@@ -4,4 +4,3 @@ version = "0.1.0"
 authors = ["Leopold Arkham <leopold.arkham@gmail.com>"]
 
 [dependencies]
-itertools = "0.5.5"

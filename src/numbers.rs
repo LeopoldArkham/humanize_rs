@@ -29,10 +29,10 @@ static SCALE: [&'static str; 9] = ["",
 
 pub trait HumanizeNumbers {
     fn ord(&self) -> String;
-    // fn to_text(&self) -> String;
+    fn to_text(&self) -> String;
 }
 
-fn stringify(res: &mut String, chunk: Vec<u64>) {
+fn stringify(res: &mut String, chunk: Vec<usize>) {
     match chunk.len() {
     	3 => {
     		match chunk[1] {
@@ -83,155 +83,139 @@ fn stringify(res: &mut String, chunk: Vec<u64>) {
     }
 }
 
-pub fn to_text(_num: u64) -> String {
-    if _num == 0 {
-        return "zero".to_string();
-    }
+macro_rules! impl_humanize_numbers_u {
+    ($name:ident for $($t:ty)*) => ($(
+        impl $name for $t {
+            fn ord(&self) -> String {
+        		let suffix = match self % 10 {
+            		1 => "st",
+            		2 => "nd",
+            		3 => "rd",
+            		_ => "th",
+        		};
+        		let mut res = String::new();
+        		let _ = write!(res, "{}{}", self, suffix);
+        		res
+    		}
 
-    let mut num = _num;
-    let mut split_digits = Vec::new();
-    // let mut divider: u64 = 10;
-
-    while num > 0 {
-        // let cur = num % 10;
-        split_digits.insert(0, num % 10);
-        num /= 10
-        // divider *= 10;
-    }
-    	
-	let (first, remainder) = split_digits.split_at(split_digits.len() % 3);
-	let chunks = first.chunks(3).chain(remainder.chunks(3)).map(|x| x.to_vec()).collect::<Vec<_>>();
-
-	let mut res = String::new();
-	let mut scale_idx = chunks.len();
-
-	for c in chunks {
-		stringify(&mut res, c);
-		scale_idx -= 1;
-		res += SCALE[scale_idx];
-	}
-
-	res
-
+    		fn to_text(&self) -> String {
+    			if *self == 0 {
+    			    return "zero".to_string();
+    			}
+    			let mut num = *self;
+    			
+    			let mut split_digits = Vec::new();
+    			// let mut divider: u64 = 10;
+			
+    			while num > 0 {
+    			    // let cur = num % 10;
+    			    split_digits.insert(0, (num % 10) as usize);
+    			    num /= 10
+    			    // divider *= 10;
+    			}
+    				
+				let (first, remainder) = split_digits.split_at(split_digits.len() % 3);
+				let chunks = first.chunks(3).chain(remainder.chunks(3)).map(|x| x.to_vec()).collect::<Vec<_>>();
+			
+				let mut res = String::new();
+				let mut scale_idx = chunks.len();
+			
+				for c in chunks {
+					stringify(&mut res, c);
+					scale_idx -= 1;
+					res += SCALE[scale_idx];
+				}
+			
+				res
+}
+        }
+    )*)
 }
 
-impl HumanizeNumbers for u8 {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
+macro_rules! impl_humanize_numbers_i {
+    ($name:ident for $($t:ty)*) => ($(
+        impl $name for $t {
+            fn ord(&self) -> String {
+            	if *self < 0 {
+        			"-".to_string() + &(self.abs() as u64).ord()
+        		} else {
+        			(*self as u64).ord()
+        		}
+    		}
+
+    		fn to_text(&self) -> String {
+    			(self.abs() as u64).to_text()
+    		}
+
+        }
+    )*)
 }
 
-impl HumanizeNumbers for i8 {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
+impl_humanize_numbers_i!(HumanizeNumbers for isize i8 i16 i32 i64);
+impl_humanize_numbers_u!(HumanizeNumbers for usize u8 u16 u32 u64);
 
-impl HumanizeNumbers for u16 {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
 
-impl HumanizeNumbers for i16 {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
+// impl HumanizeNumbers for u8 {
+//     fn ord(&self) -> String {
+//         let suffix = match self % 10 {
+//             1 => "st",
+//             2 => "nd",
+//             3 => "rd",
+//             _ => "th",
+//         };
+//         let mut res = String::new();
+//         let _ = write!(res, "{}{}", self, suffix);
+//         res
+//     }
+// }
 
-impl HumanizeNumbers for u32 {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
+// impl HumanizeNumbers for u16 {
+//     fn ord(&self) -> String {
+//         let suffix = match self % 10 {
+//             1 => "st",
+//             2 => "nd",
+//             3 => "rd",
+//             _ => "th",
+//         };
+//         let mut res = String::new();
+//         let _ = write!(res, "{}{}", self, suffix);
+//         res
+//     }
+// }
 
-impl HumanizeNumbers for i32 {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
+// impl HumanizeNumbers for u32 {
+//     fn ord(&self) -> String {
+//         let suffix = match self % 10 {
+//             1 => "st",
+//             2 => "nd",
+//             3 => "rd",
+//             _ => "th",
+//         };
+//         let mut res = String::new();
+//         let _ = write!(res, "{}{}", self, suffix);
+//         res
+//     }
+// }
 
-impl HumanizeNumbers for usize {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
-
-impl HumanizeNumbers for isize {
-    fn ord(&self) -> String {
-        let suffix = match self % 10 {
-            1 => "st",
-            2 => "nd",
-            3 => "rd",
-            _ => "th",
-        };
-        let mut res = String::new();
-        let _ = write!(res, "{}{}", self, suffix);
-        res
-    }
-}
+// impl HumanizeNumbers for usize {
+//     fn ord(&self) -> String {
+//         let suffix = match self % 10 {
+//             1 => "st",
+//             2 => "nd",
+//             3 => "rd",
+//             _ => "th",
+//         };
+//         let mut res = String::new();
+//         let _ = write!(res, "{}{}", self, suffix);
+//         res
+//     }
+// }
 
 #[test]
 fn test_ordinals() {
     assert_eq!(101.ord(), "101st");
     assert_eq!(2.ord(), "2nd");
     assert_eq!(10093.ord(), "10093rd");
-    assert_eq!((-159652).ord(), "-159652th");
+    assert_eq!((-159652).ord(), "-159652nd");
     assert_eq!(0.ord(), "0th");
 }

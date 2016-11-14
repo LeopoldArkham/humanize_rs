@@ -1,6 +1,6 @@
 use std::fmt::Write;
 
-static DIGITS: [&'static str; 10] = ["pad", "one", "two", "three", "four", "five", "six", "seven",
+static DIGITS: [&'static str; 10] = ["", "one", "two", "three", "four", "five", "six", "seven",
                                      "eight", "nine"];
 
 static TO_20: [&'static str; 10] = ["ten",
@@ -14,7 +14,7 @@ static TO_20: [&'static str; 10] = ["ten",
                                     "eighteen",
                                     "nineteen"];
 
-static TENS: [&'static str; 10] = ["padding", "ten", "twenty", "thirty", "fourty", "fifty",
+static TENS: [&'static str; 10] = ["", "ten", "twenty", "thirty", "fourty", "fifty",
                                    "sixty", "seventy", "eighty", "ninety"];
 
 static SCALE: [&'static str; 9] = ["",

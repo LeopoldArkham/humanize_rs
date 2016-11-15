@@ -9,6 +9,6 @@ fn main() {
 		println!("{}: {}", (i+1).ord(), name);
 	}
 	
-	let num: u64 = 666666666;
+	let num: i64 = -6;
 	println!("{}: {}", num, num.to_text());
 }

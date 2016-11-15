@@ -1,5 +1,3 @@
-use std::fmt::Write;
-
 static DIGITS: [&'static str; 10] = ["", "one", "two", "three", "four", "five", "six", "seven",
                                      "eight", "nine"];
 
@@ -30,6 +28,7 @@ static SCALE: [&'static str; 9] = ["",
 pub trait HumanizeNumbers {
     fn ord(&self) -> String;
     fn to_text(&self) -> String;
+    // fn intcomma(&self) -> String;
 }
 
 fn stringify(res: &mut String, chunk: Vec<usize>) {
@@ -91,9 +90,7 @@ macro_rules! impl_humanize_numbers_u {
                     3 => "rd",
                     _ => "th",
                 };
-                let mut res = String::new();
-                let _ = write!(res, "{}{}", self, suffix);
-                res
+                format!("{}{}", self, suffix)
             }
 
             fn to_text(&self) -> String {
@@ -138,7 +135,7 @@ macro_rules! impl_humanize_numbers_i {
             }
 
             fn to_text(&self) -> String {
-                (self.abs() as u64).to_text()
+                format!("minus {}", (self.abs() as u64).to_text())
             }
 
         }
@@ -147,63 +144,6 @@ macro_rules! impl_humanize_numbers_i {
 
 impl_humanize_numbers_i!(HumanizeNumbers for isize i8 i16 i32 i64);
 impl_humanize_numbers_u!(HumanizeNumbers for usize u8 u16 u32 u64);
-
-
-// impl HumanizeNumbers for u8 {
-//     fn ord(&self) -> String {
-//         let suffix = match self % 10 {
-//             1 => "st",
-//             2 => "nd",
-//             3 => "rd",
-//             _ => "th",
-//         };
-//         let mut res = String::new();
-//         let _ = write!(res, "{}{}", self, suffix);
-//         res
-//     }
-// }
-
-// impl HumanizeNumbers for u16 {
-//     fn ord(&self) -> String {
-//         let suffix = match self % 10 {
-//             1 => "st",
-//             2 => "nd",
-//             3 => "rd",
-//             _ => "th",
-//         };
-//         let mut res = String::new();
-//         let _ = write!(res, "{}{}", self, suffix);
-//         res
-//     }
-// }
-
-// impl HumanizeNumbers for u32 {
-//     fn ord(&self) -> String {
-//         let suffix = match self % 10 {
-//             1 => "st",
-//             2 => "nd",
-//             3 => "rd",
-//             _ => "th",
-//         };
-//         let mut res = String::new();
-//         let _ = write!(res, "{}{}", self, suffix);
-//         res
-//     }
-// }
-
-// impl HumanizeNumbers for usize {
-//     fn ord(&self) -> String {
-//         let suffix = match self % 10 {
-//             1 => "st",
-//             2 => "nd",
-//             3 => "rd",
-//             _ => "th",
-//         };
-//         let mut res = String::new();
-//         let _ = write!(res, "{}{}", self, suffix);
-//         res
-//     }
-// }
 
 #[test]
 fn test_ordinals() {

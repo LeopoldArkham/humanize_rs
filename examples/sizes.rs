@@ -1,10 +1,11 @@
 extern crate humanize;
-use humanize::file_sizes::*;
+use std::str;
+use humanize::file_sizes::{FileSize, file_size_opts};
 
 fn main() {
-	println!("{}", file_size(5456, file_size_opts::DECIMAL));
-	println!("{}", file_size(5456, file_size_opts::BINARY));
-	println!("{}", file_size(1024, file_size_opts::BINARY));
-	println!("{}", file_size(1023_654_123_654, file_size_opts::BINARY));
-	println!("{}", file_size(1023_654_123_654, file_size_opts::DECIMAL));
+	println!("{}", (5456).file_size(file_size_opts::BINARY).unwrap());
+	println!("{}", 1024.file_size(file_size_opts::BINARY).unwrap());
+	println!("{}", 1023_654_123_654u64.file_size(file_size_opts::BINARY).unwrap());
+	println!("{}", 1023_654_123_654u64.file_size(file_size_opts::DECIMAL).unwrap());
+	println!("{}", 123456789.file_size(file_size_opts::CONVENTIONAL).unwrap());
 }

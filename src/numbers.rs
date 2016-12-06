@@ -12,8 +12,8 @@ static TO_20: [&'static str; 10] = ["ten",
                                     "eighteen",
                                     "nineteen"];
 
-static TENS: [&'static str; 10] = ["", "ten", "twenty", "thirty", "fourty", "fifty",
-                                   "sixty", "seventy", "eighty", "ninety"];
+static TENS: [&'static str; 10] = ["", "ten", "twenty", "thirty", "fourty", "fifty", "sixty",
+                                   "seventy", "eighty", "ninety"];
 
 static SCALE: [&'static str; 9] = ["",
                                    " thousand ",
@@ -28,7 +28,7 @@ static SCALE: [&'static str; 9] = ["",
 pub trait HumanizeNumbers {
     fn ord(&self) -> String;
     fn to_text(&self) -> String;
-    // fn intcomma(&self) -> String;
+    fn intcomma(&self) -> String;
 }
 
 fn stringify(res: &mut String, chunk: Vec<usize>) {
@@ -99,26 +99,43 @@ macro_rules! impl_humanize_numbers_u {
                 }
                 let mut num = *self;
                 let mut split_digits = Vec::new();
-            
+
                 while num > 0 {
                     split_digits.insert(0, (num % 10) as usize);
                     num /= 10
                 }
-                    
+
                 let (first, remainder) = split_digits.split_at(split_digits.len() % 3);
                 let chunks = first.chunks(3).chain(remainder.chunks(3)).map(|x| x.to_vec()).collect::<Vec<_>>();
-            
+
                 let mut res = String::new();
                 let mut scale_idx = chunks.len();
-            
+
                 for c in chunks {
                     stringify(&mut res, c);
                     scale_idx -= 1;
                     res += SCALE[scale_idx];
                 }
-            
+
                 res
             }
+
+            fn intcomma(&self) -> String {
+                let mut s  = format!("{}", self);
+                if s.len() <= 3 {
+                    return s;
+                }
+
+                let mut insert_idx = s.len() % 3;
+
+                while insert_idx < s.len() {
+                    s.insert(insert_idx, ',');
+                    insert_idx += 4;
+                }
+
+                s
+            }
+
         }
     )*)
 }
@@ -136,6 +153,14 @@ macro_rules! impl_humanize_numbers_i {
 
             fn to_text(&self) -> String {
                 format!("minus {}", (self.abs() as u64).to_text())
+            }
+            
+            fn intcomma(&self) -> String {
+                if *self < 0 {
+                    "-".to_string() + &(self.abs() as u64).intcomma()
+                } else {
+                    (*self as u64).intcomma()
+                }
             }
 
         }

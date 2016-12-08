@@ -12,8 +12,8 @@ static TO_20: [&'static str; 10] = ["ten",
                                     "eighteen",
                                     "nineteen"];
 
-static TENS: [&'static str; 10] = ["", "ten", "twenty", "thirty", "fourty", "fifty",
-                                   "sixty", "seventy", "eighty", "ninety"];
+static TENS: [&'static str; 10] = ["", "ten", "twenty", "thirty", "fourty", "fifty", "sixty",
+                                   "seventy", "eighty", "ninety"];
 
 static SCALE: [&'static str; 9] = ["",
                                    " thousand ",

@@ -1,3 +1,3 @@
 pub trait Humanize {
-	fn humanize(&self) -> &str;
+    fn humanize(&self) -> &str;
 }

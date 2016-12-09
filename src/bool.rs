@@ -51,7 +51,9 @@ fn gen_list() {
                 to_true_list.extend(TO_TRUE_FR.iter());
                 to_false_list.extend(TO_FALSE_FR.iter());
             }
-            _ => {}
+            _ => {
+                unimplemented!();
+            }
         }
     }
 }
@@ -141,9 +143,4 @@ fn str_to_bool_multiple_lang() {
     assert_eq!("oui".to_bool(), Some(true));
     assert_eq!("no".to_bool(), Some(false));
     assert_eq!("non".to_bool(), Some(false));
-}
-
-#[test]
-fn bool_to_str() {
-    assert_eq!(true.humanize(), "yes");
 }

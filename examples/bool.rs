@@ -1,7 +1,6 @@
 extern crate humanize;
 
-use humanize::bool::{ToBool};
-use humanize::humanize::{Humanize};
+use humanize::bool::ToBool;
 
 fn main() {
     // &str to bool
@@ -10,8 +9,4 @@ fn main() {
     // String to bool
     let nope: String = String::from("off");
     println!("Value of nope is: {}", nope.to_bool().unwrap());
-
-    // Bool to &str
-    let sure: bool = true;
-    println!("Value of b is: {}", sure.humanize());
 }

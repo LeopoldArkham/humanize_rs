@@ -1,4 +1,3 @@
-use super::humanize::Humanize;
 
 static TO_TRUE: [&'static str; 9] = ["1", "yes", "y", "ok", "okay", "continue", "go", "on", "true"];
 
@@ -38,15 +37,6 @@ impl ToBool for String {
     }
 }
 
-impl Humanize for bool {
-    fn humanize(&self) -> &str {
-        match *self {
-            true => "yes",
-            false => "no",
-        }
-    }
-}
-
 #[test]
 fn str_to_bool() {
     assert_eq!("yes".to_bool(), Some(true));
@@ -74,9 +64,4 @@ fn string_to_bool_needs_normalizing() {
 
     let s2 = String::from(" Off");
     assert_eq!(s2.to_bool(), Some(false));
-}
-
-#[test]
-fn bool_to_str() {
-    assert_eq!(true.humanize(), "yes");
 }

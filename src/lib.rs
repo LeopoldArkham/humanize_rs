@@ -1,4 +1,6 @@
 pub extern crate humansize;
+#[macro_use]
+extern crate lazy_static;
 
 pub mod bool;
 pub mod numbers;

@@ -126,7 +126,11 @@ macro_rules! impl_humanize_numbers_u {
                     return s;
                 }
 
-                let mut insert_idx = s.len() % 3;
+                let mut insert_idx = if s.len() % 3 == 0 {
+                    3
+                } else {
+                    s.len() % 3
+                };
 
                 while insert_idx < s.len() {
                     s.insert(insert_idx, ',');
@@ -177,4 +181,26 @@ fn test_ordinals() {
     assert_eq!(10093.ord(), "10093rd");
     assert_eq!((-159652).ord(), "-159652nd");
     assert_eq!(0.ord(), "0th");
+}
+
+#[test]
+fn test_int_separators() {
+    assert_eq!(0.intcomma(), "0");
+    assert_eq!(12.intcomma(), "12");
+    assert_eq!(123.intcomma(), "123");
+    assert_eq!(1234.intcomma(), "1,234");
+    assert_eq!(12345.intcomma(), "12,345");
+    assert_eq!(123456.intcomma(), "123,456");
+    assert_eq!(1234567.intcomma(), "1,234,567");
+}
+
+#[test]
+fn test_int_separators_negative() {
+    assert_eq!((-1).intcomma(), "-1");
+    assert_eq!((-12).intcomma(), "-12");
+    assert_eq!((-123).intcomma(), "-123");
+    assert_eq!((-1234).intcomma(), "-1,234");
+    assert_eq!((-12345).intcomma(), "-12,345");
+    assert_eq!((-123456).intcomma(), "-123,456");
+    assert_eq!((-1234567).intcomma(), "-1,234,567");
 }

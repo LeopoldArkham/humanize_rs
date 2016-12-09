@@ -5,3 +5,4 @@ pub mod numbers;
 
 pub use humansize as sizes;
 pub use numbers::HumanizeNumbers;
+pub use bool::ToBool;

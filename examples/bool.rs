@@ -1,6 +1,6 @@
 extern crate humanize;
 
-use humanize::bool::ToBool;
+use humanize::ToBool;
 
 fn main() {
     // &str to bool

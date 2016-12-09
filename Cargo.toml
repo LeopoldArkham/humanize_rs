@@ -5,3 +5,5 @@ authors = ["Leopold Arkham <leopold.arkham@gmail.com>"]
 
 [dependencies]
 humansize = "0.1.1"
+lazy_static = "*"
+

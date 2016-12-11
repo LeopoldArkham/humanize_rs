@@ -15,6 +15,7 @@ lazy_static! {
     static ref TO_FALSE_LIST: Mutex<Vec<&'static str>> = Mutex::new(vec!["0"]);
 }
 
+
 /// The languages to be used for boolean parsing.
 #[derive(Debug, PartialEq)]
 pub enum Lang {
@@ -23,6 +24,7 @@ pub enum Lang {
     Spanish,
     Italian,
 }
+
 
 /// Adds a `Lang` language to the list of languages used to parse booleans.
 pub fn enable_lang(lang: Lang) {
@@ -71,6 +73,7 @@ fn to_false_list() -> Vec<&'static str> {
 fn normalize(source: &str) -> String {
     source.trim().to_lowercase()
 }
+
 
 /// This trait exposes the `to_bool()` function to parse string types into Booleans.
 pub trait ToBool {

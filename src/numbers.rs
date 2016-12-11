@@ -25,10 +25,12 @@ static SCALE: [&'static str; 9] = ["",
                                    " hexillion ",
                                    " heptillion "];
 
+/// This trait exposes methods on all integer types to display them in human friendly manners
 pub trait HumanizeNumbers {
     fn ord(&self) -> String;
     fn to_text(&self) -> String;
     fn intcomma(&self) -> String;
+    fn times(&self) -> String;
 }
 
 fn stringify(res: &mut String, chunk: Vec<usize>) {
@@ -140,6 +142,14 @@ macro_rules! impl_humanize_numbers_u {
                 s
             }
 
+            fn times(&self) -> String {
+                match *self {
+                    0 => "never".to_string(),
+                    1 => "once".to_string(),
+                    2 => "twice".to_string(),
+                    n => format!("{} times", n.to_text()),
+                }
+            }
         }
     )*)
 }
@@ -156,9 +166,14 @@ macro_rules! impl_humanize_numbers_i {
             }
 
             fn to_text(&self) -> String {
-                format!("minus {}", (self.abs() as u64).to_text())
+                if *self < 0 as $t {
+                    format!("minus {}", (self.abs() as u64).to_text())
+                }
+                else {
+                    (self.abs() as u64).to_text()
+                }
             }
-            
+
             fn intcomma(&self) -> String {
                 if *self < 0 {
                     "-".to_string() + &(self.abs() as u64).intcomma()
@@ -167,6 +182,15 @@ macro_rules! impl_humanize_numbers_i {
                 }
             }
 
+            fn times(&self) -> String {
+                match *self {
+                    -1 => "minus one time".to_string(),
+                    0 => "never".to_string(),
+                    1 => "once".to_string(),
+                    2 => "twice".to_string(),
+                    n => format!("{} times", n.to_text()),
+                }
+            }
         }
     )*)
 }
@@ -203,4 +227,15 @@ fn test_int_separators_negative() {
     assert_eq!((-12345).intcomma(), "-12,345");
     assert_eq!((-123456).intcomma(), "-123,456");
     assert_eq!((-1234567).intcomma(), "-1,234,567");
+}
+
+#[test]
+fn test_times() {
+    assert_eq!(0.times(), "never");
+    assert_eq!(1.times(), "once");
+    assert_eq!(2.times(), "twice");
+    assert_eq!(3.times(), "three times");
+    assert_eq!(10.times(), "ten times");
+    assert_eq!((-1).times(), "minus one time");
+    assert_eq!((-2).times(), "minus two times");
 }

@@ -1,7 +1,7 @@
 [package]
 name = "humanize"
 version = "0.1.0"
-authors = ["Leopold Arkham <leopold.arkham@gmail.com>"]
+authors = ["Leopold Arkham <leopold.arkham@gmail.com>", "notkild <notkild@gmail.com"]
 
 [dependencies]
 humansize = "0.1.1"

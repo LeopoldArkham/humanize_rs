@@ -27,9 +27,13 @@ static SCALE: [&'static str; 9] = ["",
 
 /// This trait exposes methods on all integer types to display them in human friendly manners
 pub trait HumanizeNumbers {
+    /// Returns the ordinal of the number.
     fn ord(&self) -> String;
+    /// Returns a fully spelled out string of the number.
     fn to_text(&self) -> String;
+    /// Returns the number as a string, with commas inserted as thousand separators.
     fn intcomma(&self) -> String;
+    /// Returns a spelled out string saying how many times an action occurred.
     fn times(&self) -> String;
 }
 

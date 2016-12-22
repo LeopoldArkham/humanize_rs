@@ -21,3 +21,9 @@ impl<'a> Strings for &'a str {
         first.to_uppercase().collect::<String>() + &self.chars().skip(1).collect::<String>()
     }
 }
+
+#[test]
+fn test_capitalize() {
+    assert_eq("hi", capitalize(), "Hi");
+    assert_eq!("6".capitalize(), "6");
+}

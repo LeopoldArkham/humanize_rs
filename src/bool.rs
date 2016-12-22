@@ -16,17 +16,23 @@ lazy_static! {
 }
 
 
-/// The languages to be used for boolean parsing.
+/// Holds the languages available for boolean parsing.
 #[derive(Debug, PartialEq)]
 pub enum Lang {
     English,
     French,
-    Spanish,
-    Italian,
 }
 
 
 /// Adds a `Lang` language to the list of languages used to parse booleans.
+///
+/// # Examples
+/// ```
+/// enable_lang(Lang::French);
+/// let input = "oui";
+///
+/// assert_eq!(input.to_bool(), true);
+/// ```
 pub fn enable_lang(lang: Lang) {
     {
         let mut lock = ENABLED_LANG.lock().unwrap();
@@ -55,9 +61,6 @@ fn gen_list() {
                 to_true_list.extend(TO_TRUE_FR.iter());
                 to_false_list.extend(TO_FALSE_FR.iter());
             }
-            _ => {
-                unimplemented!();
-            }
         }
     }
 }
@@ -77,7 +80,15 @@ fn normalize(source: &str) -> String {
 
 /// This trait exposes the `to_bool()` function to parse string types into Booleans.
 pub trait ToBool {
-    /// Attempts to parse a string into a Boolean.
+    /// Attempts to parse a string into a Boolean, using whatever languages have been enabled.
+    ///
+    /// # Examples
+    /// ```
+    /// let input = "yes";
+    /// let is_true = input.to_bool();
+    ///
+    /// assert_eq!(is_true, true);
+    /// ```
     fn to_bool(&self) -> Option<bool>;
 }
 

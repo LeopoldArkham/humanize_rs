@@ -29,9 +29,9 @@ static SCALE: [&'static str; 9] = ["",
 pub trait HumanizeNumbers {
     /// Returns the ordinal of the number.
     fn ord(&self) -> String;
-    /// Returns a fully spelled out string of the number.
+    /// Returns the number fully spelled out
     fn to_text(&self) -> String;
-    /// Returns the number as a string, with commas inserted as thousand separators.
+    /// Returns the number as a string, with commas inserted as thousands separators.
     fn intcomma(&self) -> String;
     /// Returns a spelled out string saying how many times an action occurred.
     fn times(&self) -> String;

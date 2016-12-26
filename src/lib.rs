@@ -20,4 +20,4 @@ pub mod numbers;
 pub mod strings;
 
 pub use numbers::HumanizeNumbers;
-pub use bool::ToBool;
+pub use bool::{ToBool, Lang, enable_lang};

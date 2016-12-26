@@ -28,10 +28,11 @@ pub enum Lang {
 ///
 /// # Examples
 /// ```
+/// use humanize::{enable_lang, Lang, ToBool};
 /// enable_lang(Lang::French);
 /// let input = "oui";
 ///
-/// assert_eq!(input.to_bool(), true);
+/// assert_eq!(input.to_bool(), Some(true));
 /// ```
 pub fn enable_lang(lang: Lang) {
     {
@@ -84,10 +85,11 @@ pub trait ToBool {
     ///
     /// # Examples
     /// ```
-    /// let input = "yes";
+    /// use humanize::ToBool;
+    /// let input = "1";
     /// let is_true = input.to_bool();
     ///
-    /// assert_eq!(is_true, true);
+    /// assert_eq!(is_true, Some(true));
     /// ```
     fn to_bool(&self) -> Option<bool>;
 }
